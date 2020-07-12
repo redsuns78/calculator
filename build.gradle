@@ -25,6 +25,7 @@ test {
 }
 
 apply plugin: "jacoco"
+apply plugin: "checkstyle"
 
 jacocoTestCoverageVerification {
      violationRules {
@@ -34,4 +35,8 @@ jacocoTestCoverageVerification {
                }
           }
      }
+}
+
+checkstyle {
+     checkstyleTest.enabled = false
 }
