@@ -35,4 +35,12 @@ pipeline {
 
 
 	}
+	post {
+		always {
+			mail to: 'hchan.cho@gmail.com',
+			subject: "Completed Pipeline: ${currentBuild.fullDisplayName}",
+			body: "Your build completed, please check: ${env.BUILD_URL}"
+     		}
+	}
+
 }	
