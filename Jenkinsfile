@@ -1,6 +1,8 @@
 pipeline {
 	agent any
 	stages {
+		def app
+
 		stage("Compile") {
 			steps {
 				//sh "./gradlew compileJava"
