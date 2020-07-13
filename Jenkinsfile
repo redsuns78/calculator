@@ -45,12 +45,12 @@ pipeline {
 
 		}	
 	
- 		stage("Docker build") {
+ 		//stage("Docker build") {
 			//app = docker.build("bistequr55/calculator")
-			steps {
+		//	steps {
 				//sh "docker build -t bistequr55/calculator ."
-			}
-		}
+		//	}
+		//}
 
 		stage("Docker build & push") {
 			steps {
