@@ -50,7 +50,6 @@ node {
          		* docker build on the command line */
          			app = docker.build("bistequr55/calculator")	
 			}
-		}
 
 		stage("Docker push") {
          		/* Finally, we'll push the image with two tags:
