@@ -48,18 +48,20 @@ pipeline {
  		stage("Docker build") {
 			//app = docker.build("bistequr55/calculator")
 			steps {
-				sh "docker build -t bistequr55/calculator ."
+				//sh "docker build -t bistequr55/calculator ."
 			}
 		}
 
-		stage("Docker push") {
+		stage("Docker build & push") {
 			steps {
-				/* Push image using withRegistry. */
-				docker.withRegistry('bistequr55', 'docker-login') {
-					//app.push("latest")
-					sh "docker push leszko/calculator"
-     				}
-			}
+				echo 'Starting to build docker image'
+				docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
+                		script {
+                    			def customImage = docker.build("bistequr55/calculator")
+					docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
+                    				customImage.push()
+                			}
+			}	
 		}
 
 		stage("Deploy to staging") {
