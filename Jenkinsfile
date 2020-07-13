@@ -1,5 +1,4 @@
-node {
-	agent any
+node('calculator') {
 	def app
 
 	stages {
