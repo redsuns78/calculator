@@ -41,10 +41,19 @@ pipeline {
 		}		
  		stage("Docker build") {
      			steps {
-          			sh "docker build -t leszko/calculator ."
+          			sh "docker build -t bistequr55/calculator ."
      			}
 		}
-
+		stage("Docker push") {
+     			steps {
+          			sh "docker push bistequr55/calculator"
+     			}
+		}
+		stage("Deploy to staging") {
+     			steps {
+          			sh "docker run -d --rm -p 8765:8080 --name calculator leszko/calculator"
+     			}
+		}
 
 	}
 	post {
