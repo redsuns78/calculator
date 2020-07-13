@@ -58,7 +58,8 @@ pipeline {
 				/* Push image using withRegistry. */
 				docker.withRegistry('bistequr55', 'docker-login') {
 					app.push("latest")
-     			}
+     				}
+			}
 		}
 
 		stage("Deploy to staging") {
