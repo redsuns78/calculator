@@ -1,8 +1,6 @@
 pipeline {
 	agent any
 	stages {
-		def app
-
 		stage("Compile") {
 			steps {
 				//sh "./gradlew compileJava"
@@ -48,20 +46,14 @@ pipeline {
 		}	
 	
  		stage("Docker build") {
-     			steps {
-          			//sh "docker build -t bistequr55/calculator ."
-				app = docker.build("bistequr55/calculator")
-     			}
+			app = docker.build("bistequr55/calculator")
 		}
 
 		stage("Docker push") {
-     			steps {
-          			//sh "docker push bistequr55/calculator"
-				/* Push image using withRegistry. */
-				docker.withRegistry('bistequr55', 'docker-login') {
-					app.push("latest")
-     				}
-			}
+			/* Push image using withRegistry. */
+			docker.withRegistry('bistequr55', 'docker-login') {
+				app.push("latest")
+     			}
 		}
 
 		stage("Deploy to staging") {
