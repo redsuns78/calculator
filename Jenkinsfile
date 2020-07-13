@@ -1,7 +1,6 @@
 node('calculator') {
 	def app
 
-	stages {
 		stage("Compile") {
 			steps {
 				sh "./gradlew compileJava"
@@ -73,7 +72,6 @@ node('calculator') {
      			}
 		}
 
-	}
 	post {
 		always {
 			mail to: 'hchan.cho@gmail.com',
