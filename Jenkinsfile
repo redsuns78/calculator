@@ -55,12 +55,12 @@ pipeline {
 		stage("Docker build & push") {
 			steps {
 				echo 'Starting to build docker image'
-				docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
                 		script {
                     			def customImage = docker.build("bistequr55/calculator")
 					docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
                     				customImage.push()
                 			}
+				}
 			}	
 		}
 
