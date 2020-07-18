@@ -29,12 +29,6 @@ spec:
     }
     
     stages {
-        stage('Checkout') {
-            steps {
-                git credentialsId: 'github-redsuns78',
-                url: 'https://github.com/redsuns78/calculator.git'
-            }
-        }
         stage('Docker info') {
             steps {
                 container('docker') {
