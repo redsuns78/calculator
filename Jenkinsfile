@@ -52,13 +52,13 @@ spec:
                 sh "./gradlew jacocoTestCoverageVerification"
             }
         }
-        stage('Docker info') {
-            steps {
-                container('docker') {
-                sh 'docker info'
-                }
-            }
-        }
+        //stage('Docker info') {
+        //    steps {
+        //        container('docker') {
+        //        sh 'docker info'
+        //        }
+        //    }
+        //}
         stage("Static code analysis") {
             steps {
                 sh "./gradlew checkstyleMain"
@@ -86,18 +86,23 @@ spec:
         stage("Docker build & push") {
             steps {
                 echo 'Starting to build docker image'
-                script {
-                        def customImage = docker.build("bistequr55/calculator")
-                        docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
-                            customImage.push()
-                        }
+                container('docker') {
+                    script {
+                            def customImage = docker.build("bistequr55/calculator")
+                            docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
+                                customImage.push()
+                            }
+                    }
                 }
             }
         }
 
         stage("Deploy to staging") {
             steps {
-               sh "docker run -d --rm -p 8765:8080 --name calculator bistequr55/calculator"
+               echo 'Docerk run'
+               container('docker') {
+                   sh "docker run -d --rm -p 8765:8080 --name calculator bistequr55/calculator"
+               }
             }
         }
 
