@@ -1,4 +1,4 @@
- package acceptance;
+package acceptance;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
