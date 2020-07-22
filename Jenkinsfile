@@ -88,7 +88,7 @@ spec:
                 echo 'Starting to build docker image'
                 container('docker') {
                     script {
-                            def customImage = docker.build("bistequr55/calculator")
+                            def customImage = docker.build("bistequr55/calculator:${BUILD_TIMESTAMP}")
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-login') {
                                 customImage.push()
                             }
